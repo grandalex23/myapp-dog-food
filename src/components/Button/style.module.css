@@ -1,0 +1,25 @@
+.btn {
+   padding: 10px 18px;
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 20px;
+   border-radius: 55px;
+   text-decoration: none;
+   display: inline-block;
+   background-color: #fed700;
+   transition: background-color 0.3s;
+}
+
+.primary {
+   background-color: #fed700;
+}
+
+.secondary {
+   background-color: #f44336;
+   color: black;
+}
+
+.primary:hover {
+   background-color: #feba0c;
+   color: #f44336;
+}
