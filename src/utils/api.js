@@ -15,11 +15,41 @@ class Api {
          }
       }).then(onResponce);
    }
-   getAllInfo() {
+   getUserInfo() {
       return fetch(`${this.url}/users/me`, {
          headers: {
             Authorization: this.token
          }
+      }).then(onResponce);
+   }
+   updateUserInfo(updateUser) {
+      return fetch(`${this.url}/users/me`, {
+         method: "PATCH",
+         headers: {
+            "Content-type": "application/json",
+            Authorization: this.token,
+         },
+         body: JSON.stringify(updateUser)
+      }).then(onResponce);
+   }
+
+
+   search(searchQuery) {
+      return fetch(`${this.url}/products/search?query=${searchQuery}`, {
+         headers: {
+            Authorization: this.token
+         }
+      }).then(onResponce);
+   }
+
+   changeLikeStatus(productId, isLike) {
+      console.log(isLike);
+      return fetch(`${this.url}/products/likes/${productId}`, {
+         method: isLike ? "DELETE" : "PUT",
+         headers: {
+            "Content-type": "application/json",
+            Authorization: this.token,
+         },
       }).then(onResponce);
    }
 }

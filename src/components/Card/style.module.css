@@ -41,7 +41,7 @@
 }
 
 .price {
-   color: black;
+   color: rgb(0, 0, 0);
    font-size: 20px;
    line-height: 24px;
    font-weight: 800;
@@ -50,13 +50,13 @@
 }
 
 .price_discount {
-   color: #f44336;
+   color: rgb(245, 66, 54);
 }
 
 .weight {
    font-size: 12px;
    line-height: 14px;
-   color: #7b8e98;
+   color: rgb(123, 142, 152);
    display: block;
    margin-bottom: 2px;
 }
@@ -71,8 +71,8 @@
    font-weight: 800;
    font-size: 16px;
    line-height: 20px;
-   color: #ffffff;
-   background-color: #f44336;
+   color: rgb(255, 255, 255);
+   background-color: rgb(255, 0, 0);
    border-radius: 20px;
 }
 
@@ -97,35 +97,17 @@
    border: none;
    padding: 0;
    display: flex;
+   fill: rgb(254, 241, 241);
+
 }
 
-.cart {
-   margin-top: auto;
+.isLike {
+   fill: rgb(255, 0, 0);
 }
 
 .link {
    text-decoration: none;
    color: currentColor;
-}
-
-.btn {
-   padding: 10px 18px;
-   font-size: 16px;
-   font-weight: 700;
-   line-height: 20px;
-   border-radius: 55px;
-   text-decoration: none;
-   display: inline-block;
-   transition: background-color 0.3s;
-}
-
-.btn_type_primary {
-   background-color: #fed700;
-}
-
-.btn_type_primary:hover {
-   background-color: #feba0c;
-   color: #f44336;
 }
 
 .tag {
@@ -137,16 +119,16 @@
 }
 
 .tag_type_new {
-   background-color: #03a9f4;
-   color: #ffffff;
+   background-color: rgb(3, 169, 244);
+   color: rgb(255, 255, 255);
 }
 
 .tag_type_sale {
-   background-color: #01a54e;
-   color: #ffffff;
+   background-color: rgb(1, 165, 78);
+   color: rgb(255, 255, 255);
 }
 
 .tag_type_last_product {
-   background-color: pink;
-   color: #ffffff;
+   background-color: rgb(255, 192, 203);
+   color: rgb(255, 255, 255);
 }

@@ -3,9 +3,16 @@ import React from "react";
 import { ReactComponent as SaveIcon } from "..//..//assets/images/save.svg";
 import Button from "../Button/Button";
 import cn from "classnames";
+import isLike from "../../utils/utils";
 
-const Card = ({ name, pictures, weight, price, discount, description, tags }) => {
+const Card = ({ userId, _id, likes, name, pictures, weight, price, discount, description, tags, handleLikeStatus }) => {
    const newPrice = Math.round(price - (price * discount / 100))
+   const isLiked = isLike(likes, userId)
+   const onClick = () => {
+      handleLikeStatus(_id, likes);
+      console.log(_id, likes);
+   }
+
    return (
       <div className={style.card}>
          <div className={cn(style.sticky, style['sticky_type_top-left'])}>
@@ -14,7 +21,7 @@ const Card = ({ name, pictures, weight, price, discount, description, tags }) =>
          </div>
          {/*"card__sticky card__sticky_type-top-right" */}
          <div className={cn(style.sticky, style['sticky_type_top-right'])}>
-            <SaveIcon></SaveIcon>
+            <SaveIcon onClick={onClick} className={cn(style.favorite, { [style.isLike]: !isLiked })} />
          </div>
          {/* ссылка на блок  инфо и фото товаре  */}
          <a href="/product" className={style.link}>
