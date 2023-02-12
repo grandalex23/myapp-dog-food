@@ -10,10 +10,15 @@
    border-color: grey;
 }
 
-.search__icon {
+.search__icon,
+.search__icon-close {
    position: absolute;
    margin: 0 52px;
    right: 0px;
    top: 50%;
    transform: translate(-50%, -50%);
+}
+
+.search__icon-close {
+   right: 20px;
 }

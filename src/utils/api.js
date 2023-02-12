@@ -17,11 +17,18 @@ class Api {
    }
    getUserInfo() {
       return fetch(`${this.url}/users/me`, {
-         headers: {
-            Authorization: this.token
-         }
+         headers: { Authorization: this.token }
       }).then(onResponce);
    }
+
+   getProductInfo(id) {
+      return fetch(`${this.url}/products/${id}`, {
+         headers: {
+            Authorization: this.token,
+         },
+      }).then(onResponce);
+   }
+
    updateUserInfo(updateUser) {
       return fetch(`${this.url}/users/me`, {
          method: "PATCH",
