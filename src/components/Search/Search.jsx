@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { ReactComponent as Icon } from "../../assets/images/ic-search.svg"
 import { ReactComponent as IconClose } from "../../assets/images/ic-close-input.svg"
-import "./styleSearch.css"
+
+import s from "./style.module.css"
 
 function Search({ onBtnSearchClick }) {
    const [text, setText] = useState("");
@@ -11,18 +12,24 @@ function Search({ onBtnSearchClick }) {
    }
 
    return (
-      <form onSubmit={onSubmit} className="search">
-         <input onChange={(el) => {
-            //onChange(el.target.value);
-            setText(el.target.value);
-         }}
-            className="search__input"
-            placeholder="Search"
+      <form onSubmit={onSubmit} className={s.search}>
+         <input
+            onChange={(e) => {
+               setText(e.target.value);
+            }}
+            className={s.input}
+            placeholder="Поиск"
             value={text}
          />
-         <Icon className="search__icon" onClick={() => onBtnSearchClick(text)}></Icon>
-         <IconClose className="search__icon-close" onClick={() => { setText("") }}></IconClose>
-      </ form>
+         <Icon className={s.icon} onClick={() => onBtnSearchClick(text)} />
+         <IconClose
+            className={s.iconCross}
+            onClick={() => {
+               setText("");
+               onBtnSearchClick("");
+            }}
+         />
+      </form>
    );
 }
 

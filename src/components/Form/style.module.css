@@ -1,0 +1,20 @@
+.form {
+   display: flex;
+   flex-direction: column;
+   max-width: 320px;
+   gap: 12px;
+}
+
+.error {
+   font-size: 10px;
+   color: rgb(255, 0, 0);
+}
+
+.info {
+   color: rgb(123, 142, 152);
+   font-size: 12px;
+}
+
+.right {
+   /* добавить */
+}

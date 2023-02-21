@@ -1,5 +1,7 @@
 import React from "react";
+
 import Accordion from "../../components/Accordion/Accordion";
+import PageHeader from "../../components/PageHeader/PageHeader";
 
 const data = [
    {
@@ -23,6 +25,7 @@ const data = [
 const FAQPage = () => {
    return (
       <div>
+         <PageHeader title={"Часто спрашивают"} buttonText="На главную" link={"/"}></PageHeader>
          {data.map((el) => (
             <Accordion {...el} />
          ))}

@@ -21,6 +21,14 @@ class Api {
       }).then(onResponce);
    }
 
+   getAuthorReviewInfo(id) {
+      return fetch(`${this.url}/users/${id}`, {
+         headers: {
+            Authorization: this.token,
+         },
+      }).then(onResponce);
+   }
+
    getProductInfo(id) {
       return fetch(`${this.url}/products/${id}`, {
          headers: {
@@ -28,6 +36,7 @@ class Api {
          },
       }).then(onResponce);
    }
+
 
    updateUserInfo(updateUser) {
       return fetch(`${this.url}/users/me`, {

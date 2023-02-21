@@ -28,6 +28,15 @@
    margin-bottom: 16px;
 }
 
+.price {
+   color: rgb(0, 0, 0);
+   font-size: 20px;
+   line-height: 24px;
+   font-weight: 800;
+   display: block;
+   margin-bottom: 6px;
+}
+
 .old-price {
    font-size: 12px;
    position: absolute;
@@ -38,15 +47,6 @@
    text-decoration: line-through;
    display: block;
    height: 14px;
-}
-
-.price {
-   color: rgb(0, 0, 0);
-   font-size: 20px;
-   line-height: 24px;
-   font-weight: 800;
-   display: block;
-   margin-bottom: 6px;
 }
 
 .price_discount {
@@ -117,6 +117,11 @@
    font-size: 16px;
    line-height: 20px;
 }
+
+.tag_discount {
+   background-color: #f44336;
+}
+
 
 .tag_type_new {
    background-color: rgb(3, 169, 244);

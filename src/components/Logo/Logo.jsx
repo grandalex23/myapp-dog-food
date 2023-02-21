@@ -10,7 +10,7 @@ function Logo({ }) {
 
    return (
       <Link to="/">
-         <Icon />;
+         <Icon />
       </Link>)
 }
 

@@ -1,0 +1,11 @@
+.backButton {
+   color: #7b8e98;
+   font-size: 14px;
+   margin: 12px 0;
+   display: inline-block;
+}
+
+.title {
+   font-size: 28px;
+   font-weight: 800;
+}

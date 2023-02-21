@@ -1,8 +1,12 @@
 import cn from "classnames"
-import style from "./style.module.css";
+import s from "./style.module.css";
 
-function Button({ text, type, onClick }) {
-   return <button onClick={onClick} className={cn(style.btn, { [style.primary]: type === "primary", [style.secondary]: type === "secondary" })}>{text}</button>;
+function Button({ text, type, onClick, children }) {
+   return (
+      <button text={text} onClick={onClick} className={cn(s.button, { [s.secondary]: type === "secondary", [s.primary]: type === "primary" })}>
+         {children}
+      </button>
+   );
 }
 
 export default Button;
