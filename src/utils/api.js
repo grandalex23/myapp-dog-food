@@ -1,3 +1,4 @@
+import { getItem } from "./localStorage";
 
 
 const onResponce = (result) => result.ok ? result.json() : Promise.reject(`Error: ${result.status}`)
@@ -72,7 +73,8 @@ class Api {
 
 const config = {
    url: 'https://api.react-learning.ru',
-   token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJmOTk5MmFlNWM0MGMxMGMxMWRmZTQiLCJpYXQiOjE2NDcyODY2ODEsImV4cCI6MTY3ODgyMjY4MX0.WHKXAErKZtY445yXecOFZsx981MuXicJti-okSY-tac',
+   token: getItem("jwt"),
+   // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJmOTk5MmFlNWM0MGMxMGMxMWRmZTQiLCJpYXQiOjE2NDcyODY2ODEsImV4cCI6MTY3ODgyMjY4MX0.WHKXAErKZtY445yXecOFZsx981MuXicJti-okSY-tac',
 };
 
 const api = new Api(config);

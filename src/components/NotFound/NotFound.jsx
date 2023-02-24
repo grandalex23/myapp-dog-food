@@ -9,7 +9,7 @@ const NotFound = ({ title, link, buttonText }) => {
          {/* <i></i> надо вставить иконку */}
          <h2>{title}</h2>
          <Link to={link}>
-            <Button text={buttonText}></Button>
+            <Button>{buttonText}</Button>
          </Link>
       </>
    );

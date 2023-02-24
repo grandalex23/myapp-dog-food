@@ -8,7 +8,7 @@ import Button from "../Button/Button";
 import { EMAIL_REGEXP, PHRASES } from "../../utils/constants";
 import s from "./style.module.css";
 
-const ResetForm = ({ onChangeType }) => {
+const ResetForm = ({ handleRequestAuth }) => {
    const {
       register,
       handleSubmit,
@@ -17,12 +17,12 @@ const ResetForm = ({ onChangeType }) => {
 
    const location = useLocation();
 
-   const onSubmit = (data) => {
-      console.log(data);
-   };
+   // const onSubmit = (data) => {
+   //    console.log(data);
+   // };
 
    return (
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} onSubmit={handleSubmit(handleRequestAuth)}>
          <h2 className={s.title}>Восстановление пароля</h2>
          <div className={s.info}>Для получения временного пароля необходимо ввести email, указанный при регистрации.</div>
          <Input

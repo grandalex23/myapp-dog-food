@@ -24,29 +24,29 @@ const Footer = () => {
                   <Link href="/catalog" className={s['menu__item']}>
                      Каталог
                   </Link>
-                  <a href="/catalogue" className={s['menu__item']}>
+                  <a href="/catalog" className={s['menu__item']}>
                      Акции
                   </a>
-                  <a href="/catalogue" className={s['menu__item']}>
+                  <a href="/catalog" className={s['menu__item']}>
                      Новости
                   </a>
-                  <a href="/catalogue" className={s['menu__item']}>
+                  <a href="/catalog" className={s['menu__item']}>
                      Отзывы
                   </a>
                </nav>
             </div>
             <div className={s.col}>
                <nav className={s.menu}>
-                  <a href="/catalogue" className={s['menu__item']}>
+                  <a href="/catalog" className={s['menu__item']}>
                      Оплата и доставка
                   </a>
                   <NavLink to="/faq" style={({ isActive }) => (isActive ? { textDecoration: 'underline' } : undefined)} className={s['menu__item']}>
                      Часто спрашивают
                   </NavLink>
-                  <a href="/catalogue" className={s['menu__item']}>
+                  <a href="/catalog" className={s['menu__item']}>
                      Обратная связь
                   </a>
-                  <a href="/catalogue" className={s['menu__item']}>
+                  <a href="/catalog" className={s['menu__item']}>
                      Контакты
                   </a>
                </nav>
@@ -58,7 +58,7 @@ const Footer = () => {
                      8 (999) 00-00-00
                   </a>
                   <a className={cn(s['contacts__mail'], s['contacts__link'])} href="mailto:hordog.ru@gmail.com">
-                     dogfood.ru@gmail.com
+                     dogfood@gmail.com
                   </a>
                   <ul className={cn(s['socials'], s['contacts__socials'])}>
                      <li className={s['socials__item']}>

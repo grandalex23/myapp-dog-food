@@ -5,11 +5,11 @@ import { Link, useLocation } from "react-router-dom";
 //import FormInput from "./FormInput";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-
+import { signup, signin, checkToken } from "../../utils/auth";
 import { EMAIL_REGEXP, PASSWORD_REGEXP, PHRASES } from "../../utils/constants";
 import s from "./style.module.css";
 
-const RegistrationForm = (onChangeType) => {
+const RegistrationForm = (handleRequestAuth) => {
    const {
       register,
       handleSubmit,
@@ -17,7 +17,7 @@ const RegistrationForm = (onChangeType) => {
    } = useForm({ mode: "onBlur" });
 
    const onSubmit = (data) => {
-      console.log(data);
+      signup(data).then((data) => console.log(data));
    };
 
    const location = useLocation();
@@ -32,6 +32,12 @@ const RegistrationForm = (onChangeType) => {
             autoComplete="off"
          />
          {errors?.email && <div className={s.error}>{errors.email.message}</div>}
+         <Input
+            {...register("group", { required: true })}
+            type="text"
+            placeholder="group-8"
+            autoComplete="off"
+         />
          <Input
             {...register("password", { required: true, pattern: { value: PASSWORD_REGEXP, message: PHRASES.incorrectPassword } })}
             type="password"

@@ -7,7 +7,11 @@
 
 .footer {
    background-color: #ffe44d;
-   padding: 24px 48px;
+   width: 100%;
+   padding: 20px 20px;
+   /* display: flex; */
+   /* justify-content: space-between;
+   align-items: flex-start; */
 }
 
 .wrapper {

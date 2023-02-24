@@ -10,6 +10,7 @@ import Form from "../Form/Form";
 import RegistrationForm from "../Form/RegistrationForm";
 import Footer from "../Footer/Footer";
 
+import MainPage from "../../pages/MainPage/MainPage";
 import CatalogPage from "../../pages/Catalog/CatalogPage";
 import ProductPage from "../../pages/ProductPage/ProductPage";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage"
@@ -27,6 +28,9 @@ import { LoadingContext } from "../../context/loadingContext";
 
 //import useDebounce from "../../hooks/useDebounce";
 import isLike from "../../utils/utils";
+import { openNotification } from '../../utils/openNotification';
+import { signup, signin, checkToken } from "../../utils/auth";
+import { deleteItem, setItem, getItem } from '../../utils/localStorage';
 import api from "../../utils/api";
 import s from "./style.module.css"
 
@@ -43,8 +47,87 @@ function App() {
    //const [currentTheme, setTheme] = useState(theme.light); //** состояние для Theme */
    //const onChange = (text) => setSearchQuery(text);
    const location = useLocation();
+   const navigate = useNavigate()
    const backgroundLocation = location.state?.backgroundLocation;
    const mainUrl = location.state?.mainUrl;
+   const [loggedIn, setLoggedIn] = useState(false);
+
+   // const handleUpdateUser = useCallback((updateUser) => {
+   //    api.updateUserInfo(updateUser).then((newUser) => setUser(newUser));
+   // }, []);
+
+   // useEffect(() => {
+   //    onBtnSearchClick()
+   // }, [debounceValue])
+
+   const authUrl = ["/login", "/registration", "/reset",];
+   const isAuthLocation = authUrl.includes(location?.pathname);
+
+
+   const handleRequestAuth = (data) => {
+      if (location.pathname === '/login') {
+         signin(data)
+            .then((data) => {
+               if (!data.err) {
+                  setItem('jwt', data.token);
+                  navigate('/');
+                  setLoggedIn(true);
+               }
+               return data;
+            })
+            .catch((err, data) => {
+               openNotification('error', err);
+            });
+      }
+      if (location.pathname === '/registration') {
+         signup(data)
+            .then((data) => { })
+            .catch((err) => {
+               openNotification('error', err);
+            });
+      }
+   };
+
+   const logout = () => {
+      setLoggedIn(false);
+      deleteItem('jwt');
+      if (isAuthLocation) return;
+      navigate('/login');
+   };
+
+   const handleTokenCheck = () => {
+      const jwt = getItem('jwt');
+      console.log(location.pathname);
+      if (jwt) {
+         checkToken(jwt).then((data) => {
+            if (data) {
+               setLoggedIn(true);
+            }
+         });
+      } else {
+         if (location?.pathname !== '/') {
+            logout();
+         }
+      }
+   };
+
+   useEffect(() => {
+      handleTokenCheck();
+   }, [location?.pathname]);
+
+   useEffect(() => {
+      if (loggedIn) {
+         Promise.all([api.getUserInfo(), api.getAllProducts()])
+            .then(([userData, productsData]) => {
+               setUser(userData);
+               setCards(productsData.products);
+               setSortedCards(productsData.products);
+               const favourites = productsData.products.filter((product) => isLike(product.likes, userData._id));
+               setFavouriteCards(favourites);
+               setIsLoading(false);
+            })
+      }
+   }, [loggedIn]);
 
    const onBtnSearchClick = useCallback((newSearchQuery) => {
       setIsLoading(true);
@@ -57,26 +140,6 @@ function App() {
          .finally(() => setIsLoading(false))
    }, []);
 
-   // const handleUpdateUser = useCallback((updateUser) => {
-   //    api.updateUserInfo(updateUser).then((newUser) => setUser(newUser));
-   // }, []);
-
-   // useEffect(() => {
-   //    onBtnSearchClick()
-   // }, [debounceValue])
-
-   useEffect(() => {
-      Promise.all([api.getUserInfo(), api.getAllProducts()])
-         .then(([userData, productsData]) => {
-            setUser(userData);
-            setCards(productsData.products);
-            setSortedCards(productsData.products);
-            const favourites = productsData.products.filter((product) => isLike(product.likes, userData._id));
-            setFavouriteCards(favourites);
-            setIsLoading(false);
-         })
-   }, []);
-
    const handleLikeStatus = useCallback((productId, productLikes) => {
       const isLiked = isLike(productLikes, user?._id)
       return api.changeLikeStatus(productId, isLiked).then((updateProduct) => {
@@ -84,7 +147,7 @@ function App() {
          setCards(updateCards);
          setSortedCards(updateCards);
          if (isLiked) {
-            setFavouriteCards((prevState) => prevState.filter((card) => card._id == updateProduct._id))
+            setFavouriteCards((prevState) => prevState.filter((card) => card._id !== updateProduct._id))
          } else {
             setFavouriteCards((prevState) => [...prevState, updateProduct]);
          }
@@ -128,14 +191,14 @@ function App() {
    return (
       // <ThemeContext.Provider value={{ theme: currentTheme, changeTheme }}>
       <LoadingContext.Provider value={{ isLoading, changeIsLoading }}>
-         <UserContext.Provider value={{ user, handleLikeStatus, favourites: favouriteCards.length }}>
+         <UserContext.Provider value={{ user, handleLikeStatus, favourites: favouriteCards.length, loggedIn }}>
             {/* <Modal active={modalActive} setActive={setModalActive}>
                   <MainForm></MainForm>
                </Modal> */}
             {/* <Form onFormSubmit={onFormSubmit}></Form> */}
             {/* <ContactList> contacts={contacts} </ContactList> */}
             {/* <div onClick={() => setModalActive(true)}>Регистрация и вход</div> */}
-            <Header user={user}>
+            <Header user={user} loggedIn={loggedIn} logout={logout}>
                {/* onClickLoginButton={() => { setBackgroundLocation(location.pathname) }} */}
                <Logo />
                <Routes>
@@ -147,14 +210,14 @@ function App() {
                <Routes location={backgroundLocation ? { ...backgroundLocation, pathname: mainUrl } : location}>
                   {/* Переотрисовали на этапе создания страницы Избранное */}
                   {/* <Route path="/" element={< CardList cards={cards} />}></Route> */}
-                  <Route path="/" element={< CatalogPage cards={sortedCards} currentSort={currentSort} onChangeSort={onChangeSort} searchQuery={searchQuery} />}></Route>
+                  <Route path="/" element={< MainPage />}></Route>
                   <Route path="/catalog" element={< CatalogPage cards={sortedCards} currentSort={currentSort} onChangeSort={onChangeSort} searchQuery={searchQuery} />}></Route>
                   <Route path="/product/:productId" element={<ProductPage />}></Route>
                   <Route path="/faq" element={<FAQPage />}> </Route>
-                  <Route path="/favourite" element={<FavoritePage favouriteCards={favouriteCards} />}> </Route>
-                  <Route path="/registration" element={<RegistrationForm />}></Route>
+                  <Route path="/favourite" element={loggedIn && < FavoritePage favouriteCards={favouriteCards} />}> </Route>
+                  <Route path="/registration" element={<RegistrationForm handleRequestAuth={handleRequestAuth} />}></Route>
                   <Route path="/reset" element={<ResetForm />}></Route>
-                  <Route path="/login" element={<LoginForm />}></Route>
+                  <Route path="/login" element={<LoginForm handleRequestAuth={handleRequestAuth} />}></Route>
                   <Route path="*" element={<NotFoundPage />}> </Route>
                </Routes>
                {/* <div className={s.container}> {isLoading ? <Spin className={s.spin} /> : < CardList userId={user?._id} handleLikeStatus={handleLikeStatus} cards={cards} />} </div> */}

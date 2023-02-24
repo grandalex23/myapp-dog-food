@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import cn from "classnames";
 
@@ -7,9 +7,11 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 
 import { EMAIL_REGEXP, PASSWORD_REGEXP, PHRASES } from "../../utils/constants";
+import { signup, signin, checkToken } from "../../utils/auth";
+import { deleteItem, setItem, getItem } from '../../utils/localStorage';
 import s from "./style.module.css";
 
-const LoginForm = ({ onChangeType }) => {
+const LoginForm = ({ handleRequestAuth }) => {
    const {
       register,
       handleSubmit,
@@ -17,9 +19,16 @@ const LoginForm = ({ onChangeType }) => {
    } = useForm({ mode: "onBlur" });
 
    const location = useLocation();
+   const navigate = useNavigate();
 
    const onSubmit = (data) => {
-      console.log(data);
+      signin(data).then((data) => {
+         if (!data.error) {
+            setItem("jwt", data.token);
+            navigate("/")
+         }
+      }
+      );
    };
 
    return (
@@ -35,7 +44,8 @@ const LoginForm = ({ onChangeType }) => {
          />
          {errors?.password && <div className={s.error}>{errors.password.message}</div>}
          <Link replace={true} to="/reset" state={{ backgroundLocation: location }}>
-            <div onClick={() => onChangeType("reset")} className={cn(s.info, s.right)}>
+            {/* <div onClick={() => onChangeType("reset")} className={cn(s.info, s.right)}> */}
+            <div className={cn(s.info, s.right)}>
                Восстановить пароль
             </div>
          </Link>
