@@ -35,6 +35,7 @@ const ProductPage = () => {
 
    return (
       <>
+         <PageHeader buttonText="На главную" link={"/"}></PageHeader>
          <PageHeader title={product?.name} buttonText="Назад" link={"/catalog"}></PageHeader>
          {isLoading ? <Spin className={style.spin} /> : error ? <Navigate to="/" /> : <Product  {...product} handleLikeStatus={onProductLike}></Product>}
       </>

@@ -22,79 +22,83 @@ const Product = ({ handleLikeStatus, name, description, price, discount, picture
    const isLiked = isLike(likes, user?._id);
 
    return (
-      <div className={s.product}>
-         <div className={s.header}>
-            <div className={s.info}>
-               <span className={s.articul}>Артикул</span>: 23888907
-               <span className={s.rate}></span>
-               <span className={s.reviewCount}>Количество отзывов:{reviews?.lenght}</span>
-               <Rating rate={rate} seRate={setRate} isEditable></Rating>
-            </div>
-         </div>
-         <div className={s.content}>
-            <div className={s.imageWrapper}>
-               <img className={s.image} src={pictures} alt={name} />
-            </div>
-            <div className={s.carousel}>
-               <img className={s.caruselImage} src={pictures} alt={name} />
-               <img className={s.caruselImage} src={pictures} alt={name} />
-               <img className={s.caruselImage} src={pictures} alt={name} />
-            </div>
-            <div className={s.info}>
-               <div className={s.price}>
-                  {discount > 0 && <span className={s.oldPrice}>{price} р</span>}
-                  <span className={cn(s.price, { [s.discount]: discount > 0 })}>{newPrice} P</span>
+      <div className={s.box}>
+
+         <div className={s.product}>
+            <div className={s.header}>
+               <div className={s.info}>
+                  <span className={s.articul}>Артикул</span>: 23888907
+                  <span className={s.rate}></span>
+                  <span className={s.reviewCount}>Количество отзывов:{reviews?.lenght}</span>
+                  <Rating rate={rate} setRate={setRate} isEditable></Rating>
                </div>
-               <div className={s.buttons}>
-                  <div className={s.countButton}>
-                     <div className={s.minus} onClick={() => count > 0 && setCount(count - 1)}>
-                        -
+            </div>
+            <div className={s.content}>
+               <div className={s.imageWrapper}>
+                  <img className={s.image} src={pictures} alt={name} />
+               </div>
+               <div className={s.carousel}>
+                  <img className={s.caruselImage} src={pictures} alt={name} />
+                  <img className={s.caruselImage} src={pictures} alt={name} />
+                  <img className={s.caruselImage} src={pictures} alt={name} />
+               </div>
+               <div className={s.info}>
+                  <div className={s.price}>
+                     {discount > 0 && <span className={s.oldPrice}>{price} р</span>}
+                     <span className={cn(s.price, { [s.discount]: discount > 0 })}>{newPrice} P</span>
+                  </div>
+                  <div className={s.buttons}>
+                     <div className={s.countButton}>
+                        <div className={s.minus} onClick={() => count > 0 && setCount(count - 1)}>
+                           -
+                        </div>
+                        <div className={s.count}>{count}</div>
+                        <div className={s.plus} onClick={() => count < stock && setCount(count + 1)}>
+                           +
+                        </div>
                      </div>
-                     <div className={s.count}>{count}</div>
-                     <div className={s.plus} onClick={() => count < stock && setCount(count + 1)}>
-                        +
+                     {/* <Button text={"В корзину"}></Button> */}
+                     <Button>В корзину</Button>
+                  </div>
+                  <div className={s.favourite}>
+                     <SaveIcon onClick={handleLikeStatus} className={cn(s.favoriteIcon, { [s.isLike]: isLiked })} />
+                     {isLiked ? "В избранное" : "В избранном"}
+                  </div>
+                  <div className={s.delivery}>
+                     {/* <img src={truck} alt="truck" /> */}
+                     <div className={s.right}>
+                        <h3 className={s.name}>Доставка по всему Миру!</h3>
+                        <p className={s.text}>
+                           Доставка курьером — <span className={s.bold}> от 399 ₽</span>
+                        </p>
+                        <p className={s.text}>
+                           Доставка в пункт выдачи — <span className={s.bold}> от 199 ₽</span>
+                        </p>
                      </div>
                   </div>
-                  <Button text="В корзину"></Button>
-               </div>
-               <div className={s.favourite}>
-                  <SaveIcon onClick={handleLikeStatus} className={cn(s.favoriteIcon, { [s.isLike]: isLiked })} />
-                  {isLiked ? "В избранное" : "В избранном"}
-               </div>
-               <div className={s.delivery}>
-                  {/* <img src={truck} alt="truck" /> */}
-                  <div className={s.right}>
-                     <h3 className={s.name}>Доставка по всему Миру!</h3>
-                     <p className={s.text}>
-                        Доставка курьером — <span className={s.bold}> от 399 ₽</span>
-                     </p>
-                     <p className={s.text}>
-                        Доставка в пункт выдачи — <span className={s.bold}> от 199 ₽</span>
-                     </p>
-                  </div>
-               </div>
-               <div className={s.delivery}>
-                  {/* <img src={quality} alt="quality" /> */}
-                  <div className={s.right}>
-                     <h3 className={s.name}>Гарантия качества</h3>
-                     <p className={s.text}>Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить ваши нужды.</p>
+                  <div className={s.delivery}>
+                     {/* <img src={quality} alt="quality" /> */}
+                     <div className={s.right}>
+                        <h3 className={s.name}>Гарантия качества</h3>
+                        <p className={s.text}>Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить ваши нужды.</p>
+                     </div>
                   </div>
                </div>
             </div>
+            <div className={s.description}>
+               <div className={s.title}>Описание</div>
+               <div className={s.text}>{description}</div>
+            </div>
+            <div className={s.description}>
+               <div className={s.title}>Характеристики</div>
+               <div className={s.text}>{description}</div>
+            </div>
+            <div className={s.description}>
+               <div className={s.title}>Отзывы</div>
+               <ReviewList reviews={reviews}></ReviewList>
+            </div>
+            {/* <Button>В корзину</Button> */}
          </div>
-         <div className={s.description}>
-            <div className={s.title}>Описание</div>
-            <div className={s.text}>{description}</div>
-         </div>
-         <div className={s.description}>
-            <div className={s.title}>Характеристики</div>
-            <div className={s.text}>{description}</div>
-         </div>
-         <div className={s.description}>
-            <div className={s.title}>Отзывы</div>
-            <ReviewList reviews={reviews}></ReviewList>
-         </div>
-         {/* <Button>В корзину</Button> */}
       </div>
 
    );

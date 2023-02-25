@@ -1,5 +1,9 @@
+.box {
+   padding: 25px 20px;
+}
+
 .product {
-   margin: 24px 0;
+   margin: 24px 50px;
 }
 
 .title {
@@ -137,6 +141,7 @@
 
 .delivery {
    display: flex;
+   width: 100%;
    background-color: rgba(236, 239, 241, 0.6);
    border-radius: 12px;
    padding: 12px;

@@ -18,7 +18,7 @@ const FavouritePage = ({ favouriteCards }) => {
             <Spin></Spin>
          ) : (
             <>
-               <PageHeader title={"Избранное"} buttonText="На главную" link={"/"}></PageHeader>
+               <PageHeader title={"Избранное"} buttonText={"На главную"} link={"/"}></PageHeader>
                <CardList cards={favouriteCards}></CardList>
             </>
          )}

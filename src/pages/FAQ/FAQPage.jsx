@@ -5,20 +5,20 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 
 const data = [
    {
-      title: "TITLE",
-      text: "text text text text text text text text text text text text text text text text text text text text text text text text",
+      title: " Ваша еда выглядит так заманчиво, можно ее попробовать? ",
+      text: "Наша еда конечно выглядит замечательно, богата витаминами и существенного вреда здоровью человека не нанесет, кроме растройства желудка. А вот от обычной еды вы точно откажетесь, что нанесет вред вашей репутации :-)",
    },
    {
-      title: "TITLE",
-      text: "text text text text text text text text text text text text text text text text text text text text text text text text",
+      title: " А нельзя ли как—то поскромнее собачий корм называть? Почему моя собака ест «рагу из кролика в сливочном соусе», а я макароны с сосиской?",
+      text: " Ну вы знаете, мы иногда и сами засматриваемся, так как с одной стороны она очень привлекательна, с другой, у нас так много заказов, что нет времени приготовить себе рагу, довольствуемся макаронами :-)",
    },
    {
-      title: "TITLE",
-      text: "text text text text text text text text text text text text text text text text text text text text text text text text",
+      title: "Как вы узнали, что например  «Ломтики крольчатины» стали на 20% вкуснее?",
+      text: "Ну это было очень просто, насыпали корм, потянули собачку от миски. Усилие замеряли динамометром. От новых «Ломтиков» её было просто не оторвать!",
    },
    {
-      title: "TITLE",
-      text: "text text text text text text text text text text text text text text text text text text text text text text text text",
+      title: "Я купила у вас «Копыто оленье», и у моего пёсика случился запор. Как вы так меня не предупредили? А ведь у него генеалогическое дерево!",
+      text: " Попробуйте «Лососевое масло» и подойдет любое дерево!",
    },
 ];
 

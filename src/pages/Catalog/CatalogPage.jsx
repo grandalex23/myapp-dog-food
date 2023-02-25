@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useMatch } from "react-router-dom";
 import { Spin } from "antd";
 
+
 import CardList from "../../components/CardList/CardList";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import NotFound from "../../components/NotFound/NotFound";
@@ -13,25 +14,26 @@ import { LoadingContext } from "../../context/loadingContext";
 
 const tabs = [
    {
-      id: 'cheap',
-      title: 'Сначала дешевые',
+      id: "cheap",
+      title: "Сначала дешевые",
    },
    {
-      id: 'low',
-      title: 'Сначала дорогие',
+      id: "low",
+      title: "Сначала дорогие",
    },
    {
-      id: 'sale',
-      title: 'По скидке',
+      id: "sale",
+      title: "По скидке",
    },
    {
-      id: 'default',
-      title: 'Без сортировки',
+      id: "default",
+      title: "Без сортировки",
    },
 ];
 
 const CatalogPage = ({ cards, searchQuery, onChangeSort, currentSort }) => {
    const { isLoading } = useContext(LoadingContext);
+
    return (
       <>
          {/* <div className={style.cards}> */}
@@ -47,7 +49,7 @@ const CatalogPage = ({ cards, searchQuery, onChangeSort, currentSort }) => {
                )}
                {cards?.length > 0 && <Sort currentSort={currentSort} onChangeSort={onChangeSort} tabs={tabs}></Sort>}
                <div>
-                  {cards?.length === 0 ? <NotFound title={'По данному запросу ничего не найдено'} buttonText={'Перейти в каталог'} link={'/catalog'}></NotFound> : <CardList cards={cards}></CardList>}
+                  {cards?.length === 0 ? <NotFound title={"По данному запросу ничего не найдено"} buttonText={"Перейти в каталог"} link={"/catalog"}></NotFound> : <CardList cards={cards}></CardList>}
                </div>
             </>
          )}

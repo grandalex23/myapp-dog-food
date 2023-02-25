@@ -4,8 +4,8 @@ import style from './style.module.css';
 const User = ({ user }) => {
    return (
       <div className={style.user}>
-         <span className={style.name}>{user?.name || 'Name'}</span>
-         <span className={style.about}>{user?.about || 'Proffesion'}</span>
+         <span className={style.name}>{user?.name || 'Имя Фамилия'}</span>
+         <span className={style.about}>{user?.about || 'Профессия'}</span>
       </div>
    );
 };
